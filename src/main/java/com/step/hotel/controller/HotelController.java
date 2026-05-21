@@ -40,4 +40,12 @@ public class HotelController {
         return new ResponseEntity<>(hotelBookingResponseView, HttpStatus.OK);
     }
 
+    @GetMapping("/bookings")
+    public ResponseEntity<List<HotelBookingResponseView>> listBookings(Authentication authentication) {
+        String userId = authentication.getName();
+        List<HotelBookingResponseView> bookings = hotelService.listBookings(userId);
+
+        return new ResponseEntity<>(bookings, HttpStatus.OK);
+    }
+
 }

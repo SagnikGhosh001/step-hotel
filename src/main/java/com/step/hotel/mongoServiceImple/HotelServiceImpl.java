@@ -54,7 +54,19 @@ public class HotelServiceImpl implements HotelService {
         Bookings bookings = hotel.bookRoom(user, hotelBookingRequestView.rooms());
         Bookings savedBookings = bookingMongoRepo.save(bookings);
 
+
+        hotelMongoRepo.save(hotel);
+
         return savedBookings.toResponse();
+    }
+
+    @Override
+    public List<HotelBookingResponseView> listBookings(String userId) {
+        User user = userMongoRepo.findById(userId).orElseThrow(() -> new BadRequestException(String.format("User not found with id %s", userId)));
+
+        List<HotelBookingResponseView> bookingsList = bookingMongoRepo.findByUser_Id(userId).stream().map(Bookings::toResponse).toList();
+
+        return bookingsList;
     }
 
 

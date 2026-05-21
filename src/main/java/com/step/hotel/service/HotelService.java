@@ -13,4 +13,6 @@ public interface HotelService {
     HotelResponseView createHotel(HotelRequestView hotelRequestView);
 
     HotelBookingResponseView bookHotel(HotelBookingRequestView hotelBookingRequestView, String userId);
+
+    List<HotelBookingResponseView> listBookings(String userId);
 }
