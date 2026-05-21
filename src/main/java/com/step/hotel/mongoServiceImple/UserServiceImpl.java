@@ -1,5 +1,6 @@
 package com.step.hotel.mongoServiceImple;
 
+import com.step.hotel.exceptions.BadRequestException;
 import com.step.hotel.model.User;
 import com.step.hotel.repository.UserRepo;
 import com.step.hotel.service.UserService;
@@ -19,4 +20,17 @@ public class UserServiceImpl implements UserService {
         User user = userRepo.findByUsername(username);
         return user != null;
     }
+
+    @Override
+    public User createUser(String username, String password) {
+        boolean isUserExist = isUserExist(username);
+        if (isUserExist) {
+            throw new BadRequestException("user already exists");
+        }
+
+        User newUser = new User(username, password);
+        return userRepo.save(newUser);
+    }
+
+
 }
