@@ -1,5 +1,6 @@
 package com.step.hotel.model;
 
+import com.step.hotel.views.HotelBookingResponseView;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,5 +17,9 @@ public class Bookings {
         this.user = user;
         this.hotel = hotel;
         this.rooms = rooms;
+    }
+
+    public HotelBookingResponseView toResponse() {
+        return new HotelBookingResponseView(id, hotel.toResponse(), rooms);
     }
 }

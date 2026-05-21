@@ -16,9 +16,9 @@ public class UserDetailService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        boolean userExist = userService.isUserExist(username);
-        if (!userExist) throw new NotFoundException(String.format("User not found with username %s", username));
-        return User.builder().roles("USER").username(username).build();
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        boolean userExist = userService.isUserExist(userId);
+        if (!userExist) throw new NotFoundException(String.format("User not found with userId %s", userId));
+        return User.builder().roles("USER").username(userId).build();
     }
 }

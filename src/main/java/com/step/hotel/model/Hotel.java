@@ -12,7 +12,7 @@ public class Hotel {
     private final String hotelName;
     private final String city;
     private final int totalRooms;
-    private final int availableRooms;
+    private int availableRooms;
 
     public Hotel(String hotelName, String city, int totalRooms) {
         this.hotelName = hotelName;
@@ -23,5 +23,14 @@ public class Hotel {
 
     public HotelResponseView toResponse() {
         return new HotelResponseView(id, hotelName, city, availableRooms);
+    }
+
+    public boolean isRoomAvailable(int rooms) {
+        return availableRooms >= rooms;
+    }
+
+    public Bookings bookRoom(User user, int rooms) {
+        availableRooms -= rooms;
+        return new Bookings(user, this, rooms);
     }
 }

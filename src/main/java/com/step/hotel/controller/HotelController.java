@@ -1,10 +1,13 @@
 package com.step.hotel.controller;
 
 import com.step.hotel.service.HotelService;
+import com.step.hotel.views.HotelBookingRequestView;
+import com.step.hotel.views.HotelBookingResponseView;
 import com.step.hotel.views.HotelRequestView;
 import com.step.hotel.views.HotelResponseView;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,10 +33,11 @@ public class HotelController {
         return new ResponseEntity<>(hotel, HttpStatus.OK);
     }
 
-//    @PostMapping("/bookings")
-//    public ResponseEntity<?> post(@RequestBody ? value) {
-//
-//
-//    }
+    @PostMapping("/bookings")
+    public ResponseEntity<HotelBookingResponseView> post(@RequestBody HotelBookingRequestView hotelBookingRequestView, Authentication authentication) {
+        String userId = authentication.getName();
+        HotelBookingResponseView hotelBookingResponseView = hotelService.bookHotel(hotelBookingRequestView, userId);
+        return new ResponseEntity<>(hotelBookingResponseView, HttpStatus.OK);
+    }
 
 }
