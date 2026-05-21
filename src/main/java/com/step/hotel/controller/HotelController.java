@@ -29,4 +29,11 @@ public class HotelController {
         HotelResponseView hotel = hotelService.createHotel(hotelRequestView);
         return new ResponseEntity<>(hotel, HttpStatus.OK);
     }
+
+//    @PostMapping("/bookings")
+//    public ResponseEntity<?> post(@RequestBody ? value) {
+//
+//
+//    }
+
 }

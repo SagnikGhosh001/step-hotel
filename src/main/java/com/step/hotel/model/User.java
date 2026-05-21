@@ -1,5 +1,6 @@
 package com.step.hotel.model;
 
+import com.step.hotel.views.UserLoginResponseView;
 import com.step.hotel.views.UserResponseView;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,5 +20,9 @@ public class User {
 
     public UserResponseView toResponse() {
         return new UserResponseView(id, username);
+    }
+
+    public UserLoginResponseView toLoginResponse(String token) {
+        return new UserLoginResponseView(token, toResponse());
     }
 }

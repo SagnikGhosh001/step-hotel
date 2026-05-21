@@ -5,6 +5,7 @@ import com.step.hotel.model.User;
 import com.step.hotel.repository.UserRepo;
 import com.step.hotel.service.JwtService;
 import com.step.hotel.service.UserService;
+import com.step.hotel.views.UserLoginResponseView;
 import com.step.hotel.views.UserRequestView;
 import com.step.hotel.views.UserResponseView;
 import org.springframework.stereotype.Service;
@@ -38,14 +39,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String loginUser(UserRequestView userRequestView) {
+    public UserLoginResponseView loginUser(UserRequestView userRequestView) {
         User user = userRepo.findByUsername(userRequestView.username());
 
         if (user == null) {
             throw new BadRequestException(String.format("user not found : %s", userRequestView.username()));
         }
 
-        return jwtService.generateToken(user.toResponse().id());
+        String token = jwtService.generateToken(user.toResponse().id());
+        return user.toLoginResponse(token);
     }
 
 

@@ -1,6 +1,7 @@
 package com.step.hotel.controller;
 
 import com.step.hotel.service.UserService;
+import com.step.hotel.views.UserLoginResponseView;
 import com.step.hotel.views.UserRequestView;
 import com.step.hotel.views.UserResponseView;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserRequestView userRequestView) {
-        String token = userService.loginUser(userRequestView);
-        return ResponseEntity.ok(token);
+    public ResponseEntity<UserLoginResponseView> login(@RequestBody UserRequestView userRequestView) {
+        UserLoginResponseView response = userService.loginUser(userRequestView);
+        return ResponseEntity.ok(response);
     }
 }

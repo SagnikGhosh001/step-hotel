@@ -1,5 +1,6 @@
 package com.step.hotel.service;
 
+import com.step.hotel.views.UserLoginResponseView;
 import com.step.hotel.views.UserRequestView;
 import com.step.hotel.views.UserResponseView;
 
@@ -9,5 +10,5 @@ public interface UserService {
 
     UserResponseView createUser(UserRequestView userRequestView);
 
-    String loginUser(UserRequestView userRequestView);
+    UserLoginResponseView loginUser(UserRequestView userRequestView);
 }
