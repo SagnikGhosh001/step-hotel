@@ -1,13 +1,11 @@
 package com.step.hotel.controller;
 
 import com.step.hotel.service.HotelService;
+import com.step.hotel.views.HotelRequestView;
 import com.step.hotel.views.HotelResponseView;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +18,15 @@ public class HotelController {
         this.hotelService = hotelService;
     }
 
-    @GetMapping("/search/hotels/{city}")
-    public ResponseEntity<List<HotelResponseView>> searchHotels(@PathVariable String city) {
+    @GetMapping("/search/hotels")
+    public ResponseEntity<List<HotelResponseView>> searchHotels(@RequestParam String city) {
         List<HotelResponseView> hotels = hotelService.searchHotels(city);
         return new ResponseEntity<>(hotels, HttpStatus.OK);
+    }
+
+    @PostMapping("/hotel/add")
+    public ResponseEntity<HotelResponseView> createHotels(@RequestBody HotelRequestView hotelRequestView) {
+        HotelResponseView hotel = hotelService.createHotel(hotelRequestView);
+        return new ResponseEntity<>(hotel, HttpStatus.OK);
     }
 }

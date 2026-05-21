@@ -14,11 +14,11 @@ public class Hotel {
     private final int totalRooms;
     private final int availableRooms;
 
-    public Hotel(String hotelName, String city, int totalRooms, int availableRooms) {
+    public Hotel(String hotelName, String city, int totalRooms) {
         this.hotelName = hotelName;
         this.city = city;
         this.totalRooms = totalRooms;
-        this.availableRooms = availableRooms;
+        this.availableRooms = totalRooms;
     }
 
     public HotelResponseView toResponse() {
