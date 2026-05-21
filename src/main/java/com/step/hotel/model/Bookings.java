@@ -22,4 +22,8 @@ public class Bookings {
     public HotelBookingResponseView toResponse() {
         return new HotelBookingResponseView(id, hotel.toResponse(), rooms);
     }
+
+    public String generateReceipt() {
+        return String.format("you have booked %d rooms", rooms);
+    }
 }

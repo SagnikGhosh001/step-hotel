@@ -15,4 +15,6 @@ public interface HotelService {
     HotelBookingResponseView bookHotel(HotelBookingRequestView hotelBookingRequestView, String userId);
 
     List<HotelBookingResponseView> listBookings(String userId);
+
+    String getReceipt(String userId, String bookingId);
 }

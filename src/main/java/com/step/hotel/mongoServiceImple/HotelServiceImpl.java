@@ -69,5 +69,14 @@ public class HotelServiceImpl implements HotelService {
         return bookingsList;
     }
 
+    @Override
+    public String getReceipt(String userId, String bookingId) {
+        User user = userMongoRepo.findById(userId).orElseThrow(() -> new BadRequestException(String.format("User not found with id %s", userId)));
+
+        Bookings booking = bookingMongoRepo.findById(bookingId).orElseThrow(() -> new BadRequestException(String.format("booking not found with id %s", bookingId)));
+
+        return booking.generateReceipt();
+    }
+
 
 }
