@@ -1,5 +1,6 @@
 package com.step.hotel.model;
 
+import com.step.hotel.views.UserResponseView;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,5 +15,9 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public UserResponseView toResponse() {
+        return new UserResponseView(id, username);
     }
 }

@@ -1,10 +1,13 @@
 package com.step.hotel.service;
 
-import com.step.hotel.model.User;
+import com.step.hotel.views.UserRequestView;
+import com.step.hotel.views.UserResponseView;
 
 public interface UserService {
     boolean isUserExist(String username);
 
 
-    User createUser(String username, String password);
+    UserResponseView createUser(UserRequestView userRequestView);
+
+    String loginUser(UserRequestView userRequestView);
 }

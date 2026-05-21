@@ -1,8 +1,9 @@
 package com.step.hotel.controller;
 
-import com.step.hotel.model.User;
 import com.step.hotel.service.UserService;
 import com.step.hotel.views.UserRequestView;
+import com.step.hotel.views.UserResponseView;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,13 +20,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> signup(@RequestBody UserRequestView userRequestView) {
-        User user = userService.createUser(userRequestView.username(), userRequestView.password());
-        return ResponseEntity.ok("user created successfully");
+    public ResponseEntity<UserResponseView> signup(@RequestBody UserRequestView userRequestView) {
+        UserResponseView user = userService.createUser(userRequestView);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody UserRequetView userRequetView) {
-//
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserRequestView userRequestView) {
+        String token = userService.loginUser(userRequestView);
+        return ResponseEntity.ok(token);
+    }
 }
