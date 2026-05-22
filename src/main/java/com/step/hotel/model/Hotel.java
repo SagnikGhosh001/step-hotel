@@ -2,6 +2,7 @@ package com.step.hotel.model;
 
 import com.step.hotel.views.HotelResponseView;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "hotels")
@@ -10,6 +11,7 @@ public class Hotel {
     private String id;
 
     private final String hotelName;
+    @Indexed
     private final String city;
     private final int totalRooms;
     private int availableRooms;

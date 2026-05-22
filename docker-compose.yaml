@@ -4,7 +4,7 @@ services:
   server:
     build: .
     deploy:
-      replicas: 3
+      replicas: 5
     environment:
       HOTEL_MONGO_URI: mongodb://mongo:27017/hoteldb
     depends_on:
